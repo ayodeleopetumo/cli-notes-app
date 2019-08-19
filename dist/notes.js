@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // Node Mpdules
 const fs_1 = __importDefault(require("fs"));
+const chalk_1 = __importDefault(require("chalk"));
 exports.getNotes = () => { };
 exports.addNote = (title, body) => {
     const notes = loadNotes();
@@ -18,15 +19,14 @@ exports.addNote = (title, body) => {
     console.log('New note added!');
 };
 exports.removeNote = (title) => {
-    console.log(title);
-    // const notes: { title: string; body: string }[] = loadNotes();
-    // const duplicateNotes = notes.filter(note => note.title === title);
-    // if (duplicateNotes.length) {
-    //   console.log('Duplicate title found', duplicateNotes);
-    //   return;
-    // }
-    // saveNotes(notes);
-    // console.log('New note added!');
+    const notes = loadNotes();
+    const remaningNotes = notes.filter(note => note.title !== title);
+    if (notes.length === remaningNotes.length) {
+        console.log(chalk_1.default.red.inverse(` Note with title ${chalk_1.default.bgWhite.inverse(title)} was not found `));
+        return;
+    }
+    saveNotes(remaningNotes);
+    console.log(chalk_1.default.green.inverse(` Note with title ${chalk_1.default.white(title)} removed `));
 };
 // Helper Methods
 const loadNotes = () => {

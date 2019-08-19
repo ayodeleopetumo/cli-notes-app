@@ -1,34 +1,47 @@
 // Node Mpdules
 import fs from 'fs';
+import chalk from 'chalk';
+
+interface Notes {
+  title: string;
+  body: string;
+}
 
 export const getNotes = () => {};
 
 export const addNote = (title: string, body: string) => {
-  const notes: { title: string; body: string }[] = loadNotes();
+  const notes: Notes[] = loadNotes();
   const duplicateNotes = notes.filter(note => note.title === title);
 
   if (duplicateNotes.length) {
-    console.log('Duplicate title found', duplicateNotes);
+    console.log(
+      chalk.red.inverse(` Duplicate title found, ${duplicateNotes} `)
+    );
     return;
   }
 
   notes.push({ title, body });
   saveNotes(notes);
-  console.log('New note added!');
+  console.log(chalk.green.inverse(' New note added! '));
 };
 
 export const removeNote = (title: string) => {
-  console.log(title);
-  // const notes: { title: string; body: string }[] = loadNotes();
-  // const duplicateNotes = notes.filter(note => note.title === title);
+  const notes: Notes[] = loadNotes();
+  const remaningNotes = notes.filter(note => note.title !== title);
 
-  // if (duplicateNotes.length) {
-  //   console.log('Duplicate title found', duplicateNotes);
-  //   return;
-  // }
+  if (notes.length === remaningNotes.length) {
+    console.log(
+      chalk.red.inverse(
+        ` Note with title ${chalk.bgWhite.inverse(title)} was not found `
+      )
+    );
+    return;
+  }
 
-  // saveNotes(notes);
-  // console.log('New note added!');
+  saveNotes(remaningNotes);
+  console.log(
+    chalk.green.inverse(` Note with title ${chalk.white(title)} removed `)
+  );
 };
 
 // Helper Methods
