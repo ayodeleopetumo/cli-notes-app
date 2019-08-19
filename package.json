@@ -1,0 +1,19 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^12.7.2",
+    "chalk": "^2.4.2",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3",
+    "yargs": "^13.3.0"
+  }
+}
