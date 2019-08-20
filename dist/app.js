@@ -29,7 +29,7 @@ yargs_1.default.command({
             type: 'string'
         }
     },
-    handler: argv => {
+    handler(argv) {
         notes.addNote(argv.title, argv.body);
     }
 });
@@ -43,14 +43,30 @@ yargs_1.default.command({
             type: 'string'
         }
     },
-    handler: argv => {
+    handler(argv) {
         notes.removeNote(argv.title);
     }
 });
 yargs_1.default.command({
     command: 'list',
     describe: 'Lists available notes',
-    builder: {}
+    handler() {
+        notes.listNotes();
+    }
+});
+yargs_1.default.command({
+    command: 'read',
+    describe: 'Lists a note with provided title',
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler(argv) {
+        notes.readNote(argv.title);
+    }
 });
 yargs_1.default.parse();
 //# sourceMappingURL=app.js.map

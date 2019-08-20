@@ -9,14 +9,14 @@ const chalk_1 = __importDefault(require("chalk"));
 exports.getNotes = () => { };
 exports.addNote = (title, body) => {
     const notes = loadNotes();
-    const duplicateNotes = notes.filter(note => note.title === title);
-    if (duplicateNotes.length) {
-        console.log('Duplicate title found', duplicateNotes);
+    const duplicateNote = notes.find(note => note.title === title);
+    if (duplicateNote) {
+        console.log(chalk_1.default.red.inverse(` Duplicate title found, ${duplicateNote} `));
         return;
     }
     notes.push({ title, body });
     saveNotes(notes);
-    console.log('New note added!');
+    console.log(chalk_1.default.green.inverse(' New note added! '));
 };
 exports.removeNote = (title) => {
     const notes = loadNotes();
@@ -27,6 +27,21 @@ exports.removeNote = (title) => {
     }
     saveNotes(remaningNotes);
     console.log(chalk_1.default.green.inverse(` Note with title ${chalk_1.default.white(title)} removed `));
+};
+exports.listNotes = () => {
+    const notes = loadNotes();
+    console.log(chalk_1.default.green.inverse(' Your notes '));
+    notes.forEach(note => console.log(note.title));
+};
+exports.readNote = title => {
+    const notes = loadNotes();
+    const noteToRead = notes.find(note => note.title === title);
+    if (!noteToRead) {
+        console.log(chalk_1.default.red.inverse(`Note with title(${chalk_1.default.bgWhite.inverse(title)}) wasn't found`));
+        return;
+    }
+    console.log(chalk_1.default.inverse.italic(noteToRead.title));
+    console.log(chalk_1.default(noteToRead.body));
 };
 // Helper Methods
 const loadNotes = () => {
