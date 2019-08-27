@@ -2,9 +2,10 @@
   "name": "notes-app",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "dev": "nodemon src/app.ts",
+    "start": "tsc && node dist/app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,6 +13,8 @@
   "devDependencies": {
     "@types/node": "^12.7.2",
     "chalk": "^2.4.2",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3",
     "yargs": "^13.3.0"

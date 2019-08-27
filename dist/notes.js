@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Node Mpdules
 const fs_1 = __importDefault(require("fs"));
 const chalk_1 = __importDefault(require("chalk"));
-exports.getNotes = () => { };
 exports.addNote = (title, body) => {
     const notes = loadNotes();
     const duplicateNote = notes.find(note => note.title === title);
